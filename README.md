@@ -163,9 +163,8 @@ npm run dev              # Servidor com hot reload
 
 # Produção
 npm start               # Servidor local (TypeScript)
-npm run build           # Compila o projeto para JavaScript
-npm run start:prod      # Servidor em produção (JavaScript compilado)
-npm run deploy:prepare  # Prepara o build para deploy (build + migrations)
+npm run start:prod      # Servidor em produção (TypeScript direto)
+npm run deploy:prepare  # Prepara para deploy (migrations)
 
 # Banco de dados
 npm run db:generate     # Gera migrations
