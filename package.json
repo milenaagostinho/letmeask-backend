@@ -8,7 +8,7 @@
     "start": "node --env-file .env --experimental-strip-types --no-warnings src/server.ts",
     "dev": "node --env-file .env --experimental-strip-types --no-warnings --watch src/server.ts",
     "build": "tsc",
-    "start:prod": "node dist/server.js",
+    "start:prod": "node server.js",
     "deploy:prepare": "npm run build && npm run db:migrate",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
