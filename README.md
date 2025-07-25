@@ -173,6 +173,92 @@ npm run db:migrate      # Executa migrations
 npm run db:seed         # Popula o banco com dados iniciais
 ```
 
+## 🚀 Deploy e Produção
+
+### Build para Produção
+
+Para preparar o projeto para produção, siga os passos abaixo:
+
+```bash
+# 1. Instalar dependências
+npm install --production=false
+
+# 2. Compilar o TypeScript para JavaScript
+npm run build
+
+# 3. Executar migrations no banco de produção
+npm run db:migrate
+
+# 4. Iniciar o servidor em produção
+npm run start:prod
+```
+
+### Script de Deploy Automatizado
+
+```bash
+# Executa build + migrations em um único comando
+npm run deploy:prepare
+
+# Depois inicia o servidor
+npm run start:prod
+```
+
+### Variáveis de Ambiente para Produção
+
+Configure as seguintes variáveis de ambiente no servidor de produção:
+
+```env
+# Banco de dados (URL de produção)
+DATABASE_URL=postgresql://usuario:senha@host:5432/database_prod
+
+# Servidor
+PORT=3333
+NODE_ENV=production
+
+# Google Gemini AI
+GEMINI_API_KEY=sua_api_key_de_producao
+```
+
+### Estrutura após Build
+
+Após executar `npm run build`, o projeto compilado ficará em:
+
+```
+dist/
+├── server.js           # Servidor principal
+├── env.js              # Validação de ambiente
+├── db/
+│   ├── connection.js   # Conexão com banco
+│   ├── schema/         # Esquemas compilados
+│   └── migrations/     # Migrations
+└── services/
+    └── gemini.js       # Serviços de IA
+```
+
+### Deploy em Serviços Cloud
+
+#### Railway, Render, ou similares:
+```bash
+# Comando de build
+npm run deploy:prepare
+
+# Comando de start
+npm run start:prod
+```
+
+#### PM2 (Process Manager):
+```bash
+# Instalar PM2 globalmente
+npm install -g pm2
+
+# Iniciar com PM2
+pm2 start dist/server.js --name "nlw-agents-server"
+
+# Configurar para reiniciar automaticamente
+pm2 startup
+pm2 save
+```
+
 ## 🐳 Docker
 
 O projeto utiliza Docker Compose para o banco de dados PostgreSQL com a extensão pgvector:
